@@ -17,7 +17,7 @@ from bs4 import BeautifulSoup
 #from html_table_extractor.extractor import Extractor
 from lxml import etree
 import requests
-import gspread
+#import gspread
 sleep(30)
 screen_size=0
 os.system('pkill -o chromium')
