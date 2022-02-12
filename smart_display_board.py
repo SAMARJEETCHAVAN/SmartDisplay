@@ -1,16 +1,8 @@
 import sys#imports inbuilt sys module for system related functions.
-from time import sleep#imports inbuilt sleep method from time module. This method is used to introduce time-pause in the program.
 import time
 import datetime
-from time import strftime 
 import os
 from time import sleep
-import string
-import textwrap
-import webbrowser
-import socket
-from lxml import etree
-import requests
 #import gspread
 sleep(30)
 """screen_size=0
