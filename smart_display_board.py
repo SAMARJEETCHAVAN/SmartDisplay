@@ -14,7 +14,7 @@ import textwrap
 import webbrowser
 import socket
 from bs4 import BeautifulSoup
-from html_table_extractor.extractor import Extractor
+#from html_table_extractor.extractor import Extractor
 from lxml import etree
 import requests
 import gspread
