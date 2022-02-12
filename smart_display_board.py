@@ -1,20 +1,14 @@
 import sys#imports inbuilt sys module for system related functions.
-#import RPi.GPIO as GPIO#imports inbuilt RPi.GPIO module for General Purpose input output pins related functions.
-#from gpiozero import Buzzer#imports inbuilt Buzzer method from gpiozero module. This method is used to handle the buzzer to make sounds.
 from time import sleep#imports inbuilt sleep method from time module. This method is used to introduce time-pause in the program.
 import time
 import datetime
 from time import strftime 
 import os
 from time import sleep
-#from PIL import ImageTk,Image,ImageDraw,ImageFont
-#from resizeimage import resizeimage
 import string
 import textwrap
 import webbrowser
 import socket
-from bs4 import BeautifulSoup
-#from html_table_extractor.extractor import Extractor
 from lxml import etree
 import requests
 #import gspread
