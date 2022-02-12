@@ -19,7 +19,7 @@ from lxml import etree
 import requests
 #import gspread
 sleep(30)
-screen_size=0
+"""screen_size=0
 os.system('pkill -o chromium')
 os.system("pkill feh")
 try:
@@ -29,7 +29,7 @@ except:
 f = open("Screen_size.txt", "r")
 screen_size=(f.read())
 screen_width = screen_size[:screen_size.index(' ')]
-screen_height = screen_size[screen_size.index(' ')+1:]
+screen_height = screen_size[screen_size.index(' ')+1:]"""
 time1 = 30
 time2 = 120
 time3 = 300
