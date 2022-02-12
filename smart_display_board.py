@@ -7,7 +7,7 @@ import datetime
 from time import strftime 
 import os
 from time import sleep
-from PIL import ImageTk,Image,ImageDraw,ImageFont
+#from PIL import ImageTk,Image,ImageDraw,ImageFont
 #from resizeimage import resizeimage
 import string
 import textwrap
