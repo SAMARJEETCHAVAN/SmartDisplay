@@ -3,8 +3,154 @@ import time
 import datetime
 import os
 from time import sleep
-#import gspread
-sleep(30)
+import re, uuid
+import telepot
+from PIL import ImageTk,Image,ImageDraw,ImageFont
+from resizeimage import resizeimage
+import subprocess
+
+loopstart = 1
+try:
+    os.system('python /home/pi/SmartDisplay/find_screen_size.py')
+except:
+    temp = 'temp'
+f = open("Screen_size.txt", "r")
+screen_size=(f.read())
+screen_width = screen_size[:screen_size.index(' ')]
+screen_height = screen_size[screen_size.index(' ')+1:]
+
+users_list=[]
+telegramids={414553391:'Samarjeet Chavan',1008930089:'Sangeeta Mudegol',1516168486:'Nina Ranjeet Patil',1378878389:'Rohan Ranjeet Patil'}
+for i in telegramids.keys():
+    users_list.append(i)
+
+DeviceMACaddress = (':'.join(re.findall('..', '%012x' % uuid.getnode())))
+if(str(DeviceMACaddress)=="b8:27:eb:d3:d9:7b"):
+    name_of_bot = "Demo"
+    bot = telepot.Bot('5009488601:AAEkQQbQQc9wgC4pMzoX-yIWeCUpjIsPaiM')
+elif(str(DeviceMACaddress)==""):
+    name_of_bot = "MIRAJ 1"
+    bot = telepot.Bot('')
+elif(str(DeviceMACaddress)==""):
+    name_of_bot = "MIRAJ 2"
+    bot = telepot.Bot('')
+elif(str(DeviceMACaddress)==""):
+    name_of_bot = "NASHIK 1"
+    bot = telepot.Bot('')
+elif(str(DeviceMACaddress)==""):
+    name_of_bot = "NASHIK 2"
+    bot = telepot.Bot('')
+def create(img_locatn):
+    image = Image.open(img_locatn)
+    new_image = image.resize((int(screen_width), int(screen_height)))
+    new_image.save(img_locatn)
+    os.system("(pkill -o chromium)")
+    os.system("feh --hide-pointer -x -q -B white -g "+str(screen_width)+"x"+str(screen_height)+" '"+str(img_locatn)+"' &")
+def handle(msg):
+    global loopstart
+    os.system("(pkill -o chromium)")
+    os.system("(pkill feh)")
+    loopstart = 0
+    chat_id = msg['chat']['id']
+    if 'text' in msg:
+        command = msg['text']
+        original_text = command
+        try:
+            command = str(command.encode('utf-8'))
+        except:
+            command = str(command)
+        if ('http' in command):
+            temp = "temp"
+        else:
+            command = command.replace(" ","")
+            command = command.lower()
+        print('Got command: %s' % command)
+        for ids in users_list:
+            try:
+                bot.sendMessage(ids,str(telegramids[chat_id])+' has sent '+str(command)+' to this bot')
+            except:
+                temp='temp'
+        if(command == "lunch"):
+            create('/home/pi/SmartDisplay/lunch.png')
+        elif(command == "startloop"):
+            os.system("(pkill feh)")
+            os.system("(pkill -o chromium)")
+            loopstart = 1
+        elif(command == "tea"):
+            create('/home/pi/SmartDisplay/tea.png')
+        elif(command == "end"):
+            create('/home/pi/SmartDisplay/END.png')
+        elif("http" in command):
+            os.system('chromium-browser --start-fullscreen  '+command+'&')
+        elif 'safpro' == command.lower():
+            for i in range(1,17):
+                try:
+                    create('/home/pi/SmartDisplay/safpro/Slide'+str(i)+'.JPG')
+                    sleep(20)
+                    os.system("(pkill feh)")
+                    sleep(1)
+                except:
+                    temp = 'temp'
+            loopstart = 1
+            bot.sendMessage(chat_id,'safpro Loop Terminated')
+        elif 'training' == command.lower():
+            for i in range(1,59):
+                try:
+                    create('/home/pi/SmartDisplay/training/Slide'+str(i)+'.PNG')
+                    sleep(20)
+                    os.system("(pkill feh)")
+                    sleep(1)
+                except:
+                    temp = 'temp'
+            loopstart = 1
+            bot.sendMessage(chat_id,'safpro Loop Terminated')
+        else:
+            bot.sendMessage(chat_id,'Please enter one of following:\n1:lunch\n2:tea\n3:lunch\n4:end\n5:safpro\n6:training\n OR DIRECTLY SEND A PICTURE/VIDEO/LINK TO DISPLAY. Later send "startloop" to continue views in loo')
+            
+    elif 'photo' in msg:
+        file_id=(msg['photo'][2]['file_id'])
+        bot.download_file(file_id,'/home/pi/SmartDisplay/xyz.png')
+        try :
+            image = Image.open('/home/pi/SmartDisplay/xyz.png')
+            new_image = image.resize((int(int(screen_height)*1.77), int(screen_height)))
+            new_image.save('/home/pi/Fresh Express Documents/xyz.png')
+            create("/home/pi/SmartDisplay/xyz.png")
+        except :
+            bot.sendMessage(chat_id,"DISPLAYING THIS IMAGE WAS'NT POSSIBLE")
+    elif 'document' in msg:
+        print(msg)
+        file_id = msg['document']['file_id']
+        if ((msg['document']['mime_type']==u'image/jpeg')or(msg['document']['mime_type']==u'image/png')or(msg['document']['mime_type']==u'image/jpeg')):
+            bot.sendMessage(chat_id,'Received '+str(msg['document']['file_name']))
+            bot.download_file(file_id,'/home/pi/SmartDisplay/xyz.png')
+            try :
+                create('/home/pi/SmartDisplay/xyz.png')
+            except :
+                bot.sendMessage(chat_id,"DISPLAYING THIS IMAGE WAS'NT POSSIBLE")
+                print('image not created')
+        elif(msg['document']['mime_type']==u'video/mp4'):
+            bot.sendMessage(chat_id,'Received a video')
+            bot.download_file(file_id,'/home/pi/SmartDisplay/xyz.mp4')
+            video_path = '/home/pi/SmartDisplay/xyz.mp4'
+            subprocess.Popen(['vlc',video_path,'--fullscreen','--play-and-exit'])
+            loopstart = 1
+        else:
+            bot.sendMessage(chat_id,'Bot cannot receive this kind of file!')
+    elif 'video' in msg:
+        file_id = msg['video']['file_id']
+        if (msg['video']['mime_type']==u'video/mp4'):
+            bot.sendMessage(chat_id,'Received a video')
+            bot.download_file(file_id,'/home/pi/SmartDisplay/xyz.mp4')
+            video_path = '/home/pi/SmartDisplay/xyz.mp4'
+            subprocess.Popen(['vlc',video_path,'--fullscreen','--play-and-exit'])
+            loopstart = 1
+        else:
+            bot.sendMessage(chat_id,'Bot cannot receive this kind of file!')
+            loopstart = 1
+    else:
+        bot.sendMessage(chat_id,'Please enter one of following:\n1:lunch\n2:tea\n3:lunch\n4:end\n5:safpro\n6:training\n OR DIRECTLY SEND A PICTURE/VIDEO/LINK TO DISPLAY. Later send "startloop" to continue views in loo')
+        loopstart=1        
+bot.message_loop(handle)
 time1 = 5
 time2 = 120
 time3 = 300
@@ -23,12 +169,15 @@ list_of_links = ['http://192.168.2.11/smartview/punnet_view.php',
                  ]
 
 while True:
-    try:
-        for link in list_of_links:
-            os.system('chromium-browser --start-fullscreen  '+link+'&')
-            sleep(time2)
-            os.system('pkill -o chromium')
-            sleep(time1)
-    except:
-        tryagain='tryagain'
-        print('There was some Error')
+    if(loopstart==1):
+        try:
+            for link in list_of_links:
+                os.system('chromium-browser --start-fullscreen  '+link+'&')
+                sleep(time2)
+                os.system('pkill -o chromium')
+                sleep(time1)
+        except:
+            tryagain='tryagain'
+            print('There was some Error')
+    else:
+        temp = "temp"
