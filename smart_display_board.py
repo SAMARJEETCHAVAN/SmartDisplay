@@ -15,7 +15,7 @@ try:
     os.system('python /home/pi/SmartDisplay/find_screen_size.py')
 except:
     temp = 'temp'
-f = open("Screen_size.txt", "r")
+f = open("/home/pi/SmartDisplay/Screen_size.txt", "r")
 screen_size=(f.read())
 screen_width = screen_size[:screen_size.index(' ')]
 screen_height = screen_size[screen_size.index(' ')+1:]
