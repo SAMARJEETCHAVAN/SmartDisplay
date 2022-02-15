@@ -30,16 +30,16 @@ if(str(DeviceMACaddress)=="b8:27:eb:d3:d9:7b"):
     bot = telepot.Bot('5009488601:AAEkQQbQQc9wgC4pMzoX-yIWeCUpjIsPaiM')
 elif(str(DeviceMACaddress)==""):
     name_of_bot = "MIRAJ 1"
-    bot = telepot.Bot('')
+    bot = telepot.Bot('909059968:AAFWPZCJIKC5z_bneqVAAlSda0zrxQfMfeU')
 elif(str(DeviceMACaddress)==""):
     name_of_bot = "MIRAJ 2"
-    bot = telepot.Bot('')
+    bot = telepot.Bot('821574146:AAF3YcFUInPlkI0QmBSulAl4nzId0Nchxoc')
 elif(str(DeviceMACaddress)==""):
-    name_of_bot = "NASHIK 1"
-    bot = telepot.Bot('')
+    name_of_bot = "IDEAL 1"
+    bot = telepot.Bot('887551017:AAHNt2fEoI6uXjGVHV30T6t9-DtoxCPtdyo')
 elif(str(DeviceMACaddress)==""):
-    name_of_bot = "NASHIK 2"
-    bot = telepot.Bot('')
+    name_of_bot = "IDEAL 2"
+    bot = telepot.Bot('585984007:AAFOrkgTR2hc8Tnk1a0GDw0ANnFLUAZegz4')
 def create(img_locatn):
     image = Image.open(img_locatn)
     new_image = image.resize((int(screen_width), int(screen_height)))
