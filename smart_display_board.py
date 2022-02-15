@@ -23,6 +23,13 @@ users_list=[]
 telegramids={414553391:'Samarjeet Chavan',1008930089:'Sangeeta Mudegol',1516168486:'Nina Ranjeet Patil',1378878389:'Rohan Ranjeet Patil'}
 for i in telegramids.keys():
     users_list.append(i)
+txt_msg = 'This display will show all views at localhost/smartview one by one.\nShare any video/Image to display\nEnter Tea/Lunch/End for announcements.\nEnter "startloop" if display is stuck on some screen.'
+for ids in users_list:
+    try:
+        bot.sendMessage(ids,name_of_bot+" started")
+        bot.sendMessage(ids,str(txt_msg))    
+    except:
+        temp = 'temp'
 
 DeviceMACaddress = (':'.join(re.findall('..', '%012x' % uuid.getnode())))
 if(str(DeviceMACaddress)=="b8:27:eb:d3:d9:7b"):
@@ -148,7 +155,7 @@ def handle(msg):
             bot.sendMessage(chat_id,'Bot cannot receive this kind of file!')
             loopstart = 1
     else:
-        bot.sendMessage(chat_id,'Please enter one of following:\n1:lunch\n2:tea\n3:lunch\n4:end\n5:safpro\n6:training\n OR DIRECTLY SEND A PICTURE/VIDEO/LINK TO DISPLAY. Later send "startloop" to continue views in loo')
+        bot.sendMessage(chat_id,'Please enter one of following:\n1:lunch\n2:tea\n3:lunch\n4:end\n5:safpro\n6:training\n OR DIRECTLY SEND A PICTURE/VIDEO/LINK TO DISPLAY. Later send "startloop" to continue views in loop')
         loopstart=1        
 bot.message_loop(handle)
 time1 = 5
