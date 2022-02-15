@@ -9,6 +9,7 @@ from PIL import ImageTk,Image,ImageDraw,ImageFont
 from resizeimage import resizeimage
 import subprocess
 
+sleep(120)
 loopstart = 1
 try:
     os.system('python /home/pi/SmartDisplay/find_screen_size.py')
