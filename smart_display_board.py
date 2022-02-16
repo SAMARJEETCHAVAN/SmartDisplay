@@ -32,7 +32,7 @@ try:
     elif(str(DeviceMACaddress)=='b8:27:eb:1d:48:07'):
         name_of_bot = "MIRAJ 1"
         bot = telepot.Bot('909059968:AAFWPZCJIKC5z_bneqVAAlSda0zrxQfMfeU')
-    elif(str(DeviceMACaddress)==""):
+    elif(str(DeviceMACaddress)=='b8:27:eb:29:8a:b0'):
         name_of_bot = "MIRAJ 2"
         bot = telepot.Bot('821574146:AAF3YcFUInPlkI0QmBSulAl4nzId0Nchxoc')
     elif(str(DeviceMACaddress)=='b8:27:eb:03:83:52'):
