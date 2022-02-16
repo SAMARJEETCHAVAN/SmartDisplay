@@ -8,7 +8,7 @@ import telepot
 from PIL import ImageTk,Image,ImageDraw,ImageFont
 from resizeimage import resizeimage
 import subprocess
-
+import socket
 if os.environ.get('DISPLAY','') == '':
     print('no display found. Using :0.0')
     os.environ.__setitem__('DISPLAY', ':0.0')
@@ -24,31 +24,37 @@ screen_size=(f.read())
 screen_width = screen_size[:screen_size.index(' ')]
 screen_height = screen_size[screen_size.index(' ')+1:]
 
-DeviceMACaddress = (':'.join(re.findall('..', '%012x' % uuid.getnode())))
-if(str(DeviceMACaddress)=="b8:27:eb:d3:d9:7b"):
-    name_of_bot = "Demo"
-    bot = telepot.Bot('5009488601:AAEkQQbQQc9wgC4pMzoX-yIWeCUpjIsPaiM')
-elif(str(DeviceMACaddress)==""):
-    name_of_bot = "MIRAJ 1"
-    bot = telepot.Bot('909059968:AAFWPZCJIKC5z_bneqVAAlSda0zrxQfMfeU')
-elif(str(DeviceMACaddress)==""):
-    name_of_bot = "MIRAJ 2"
-    bot = telepot.Bot('821574146:AAF3YcFUInPlkI0QmBSulAl4nzId0Nchxoc')
-elif(str(DeviceMACaddress)==""):
-    name_of_bot = "IDEAL 1"
-    bot = telepot.Bot('887551017:AAHNt2fEoI6uXjGVHV30T6t9-DtoxCPtdyo')
-elif(str(DeviceMACaddress)==""):
-    name_of_bot = "IDEAL 2"
-    bot = telepot.Bot('585984007:AAFOrkgTR2hc8Tnk1a0GDw0ANnFLUAZegz4')
-
+try:
+    DeviceMACaddress = (':'.join(re.findall('..', '%012x' % uuid.getnode())))
+    if(str(DeviceMACaddress)=="b8:27:eb:d3:d9:7b"):
+        name_of_bot = "Demo"
+        bot = telepot.Bot('5009488601:AAEkQQbQQc9wgC4pMzoX-yIWeCUpjIsPaiM')
+    elif(str(DeviceMACaddress)==""):
+        name_of_bot = "MIRAJ 1"
+        bot = telepot.Bot('909059968:AAFWPZCJIKC5z_bneqVAAlSda0zrxQfMfeU')
+    elif(str(DeviceMACaddress)==""):
+        name_of_bot = "MIRAJ 2"
+        bot = telepot.Bot('821574146:AAF3YcFUInPlkI0QmBSulAl4nzId0Nchxoc')
+    elif(str(DeviceMACaddress)=='b8:27:eb:03:83:52'):
+        name_of_bot = "IDEAL 1"
+        bot = telepot.Bot('887551017:AAHNt2fEoI6uXjGVHV30T6t9-DtoxCPtdyo')
+    elif(str(DeviceMACaddress)==""):
+        name_of_bot = "IDEAL 2"
+        bot = telepot.Bot('585984007:AAFOrkgTR2hc8Tnk1a0GDw0ANnFLUAZegz4')
+except:
+    temp = "temp"
 users_list=[]
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+s.connect(("8.8.8.8", 80))
+CurrentIP=str(s.getsockname()[0])
+s.close()
 telegramids={414553391:'Samarjeet Chavan',1008930089:'Sangeeta Mudegol',1516168486:'Nina Ranjeet Patil',1378878389:'Rohan Ranjeet Patil'}
 for i in telegramids.keys():
     users_list.append(i)
 txt_msg = 'This display will show all views at localhost/smartview one by one.\nShare any video/Image to display\nEnter Tea/Lunch/End for announcements.\nEnter "startloop" if display is stuck on some screen.'
 for ids in users_list:
     try:
-        bot.sendMessage(ids,name_of_bot+" started")
+        bot.sendMessage(ids,name_of_bot+" started with IP address as,"+CurrentIP)
         bot.sendMessage(ids,str(txt_msg))    
     except:
         temp = 'temp'
