@@ -26,7 +26,7 @@ screen_height = screen_size[screen_size.index(' ')+1:]
 
 try:
     DeviceMACaddress = (':'.join(re.findall('..', '%012x' % uuid.getnode())))
-    if(str(DeviceMACaddress)=="b8:27:eb:d3:d9:7b"):
+    if(str(DeviceMACaddress)==""):
         name_of_bot = "Demo"
         bot = telepot.Bot('5009488601:AAEkQQbQQc9wgC4pMzoX-yIWeCUpjIsPaiM')
     elif(str(DeviceMACaddress)=='b8:27:eb:1d:48:07'):
