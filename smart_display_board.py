@@ -9,7 +9,11 @@ from PIL import ImageTk,Image,ImageDraw,ImageFont
 from resizeimage import resizeimage
 import subprocess
 
-sleep(120)
+if os.environ.get('DISPLAY','') == '':
+    print('no display found. Using :0.0')
+    os.environ.__setitem__('DISPLAY', ':0.0')
+
+sleep(60)
 loopstart = 1
 try:
     os.system('python /home/pi/SmartDisplay/find_screen_size.py')
@@ -19,18 +23,6 @@ f = open("/home/pi/SmartDisplay/Screen_size.txt", "r")
 screen_size=(f.read())
 screen_width = screen_size[:screen_size.index(' ')]
 screen_height = screen_size[screen_size.index(' ')+1:]
-
-users_list=[]
-telegramids={414553391:'Samarjeet Chavan',1008930089:'Sangeeta Mudegol',1516168486:'Nina Ranjeet Patil',1378878389:'Rohan Ranjeet Patil'}
-for i in telegramids.keys():
-    users_list.append(i)
-txt_msg = 'This display will show all views at localhost/smartview one by one.\nShare any video/Image to display\nEnter Tea/Lunch/End for announcements.\nEnter "startloop" if display is stuck on some screen.'
-for ids in users_list:
-    try:
-        bot.sendMessage(ids,name_of_bot+" started")
-        bot.sendMessage(ids,str(txt_msg))    
-    except:
-        temp = 'temp'
 
 DeviceMACaddress = (':'.join(re.findall('..', '%012x' % uuid.getnode())))
 if(str(DeviceMACaddress)=="b8:27:eb:d3:d9:7b"):
@@ -48,6 +40,19 @@ elif(str(DeviceMACaddress)==""):
 elif(str(DeviceMACaddress)==""):
     name_of_bot = "IDEAL 2"
     bot = telepot.Bot('585984007:AAFOrkgTR2hc8Tnk1a0GDw0ANnFLUAZegz4')
+
+users_list=[]
+telegramids={414553391:'Samarjeet Chavan',1008930089:'Sangeeta Mudegol',1516168486:'Nina Ranjeet Patil',1378878389:'Rohan Ranjeet Patil'}
+for i in telegramids.keys():
+    users_list.append(i)
+txt_msg = 'This display will show all views at localhost/smartview one by one.\nShare any video/Image to display\nEnter Tea/Lunch/End for announcements.\nEnter "startloop" if display is stuck on some screen.'
+for ids in users_list:
+    try:
+        bot.sendMessage(ids,name_of_bot+" started")
+        bot.sendMessage(ids,str(txt_msg))    
+    except:
+        temp = 'temp'
+
 def create(img_locatn):
     image = Image.open(img_locatn)
     new_image = image.resize((int(screen_width), int(screen_height)))
