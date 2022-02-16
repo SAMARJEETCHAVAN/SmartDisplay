@@ -29,7 +29,7 @@ try:
     if(str(DeviceMACaddress)=="b8:27:eb:d3:d9:7b"):
         name_of_bot = "Demo"
         bot = telepot.Bot('5009488601:AAEkQQbQQc9wgC4pMzoX-yIWeCUpjIsPaiM')
-    elif(str(DeviceMACaddress)==""):
+    elif(str(DeviceMACaddress)=='b8:27:eb:1d:48:07'):
         name_of_bot = "MIRAJ 1"
         bot = telepot.Bot('909059968:AAFWPZCJIKC5z_bneqVAAlSda0zrxQfMfeU')
     elif(str(DeviceMACaddress)==""):
