@@ -51,7 +51,7 @@ s.close()
 telegramids={414553391:'Samarjeet Chavan',1008930089:'Sangeeta Mudegol',1516168486:'Nina Ranjeet Patil',1378878389:'Rohan Ranjeet Patil'}
 for i in telegramids.keys():
     users_list.append(i)
-txt_msg = 'This display will show all views at localhost/smartview one by one.\nShare any video/Image to display\nEnter Tea/Lunch/End for announcements.\nEnter "startloop" if display is stuck on some screen.'
+txt_msg = 'This display will show all views at localhost/smartview one by one.\nShare any video/Image to display\nEnter Tea/Lunch/End for announcements.\nEnter "startloop" if display is stuck on some screen.\n If you dont see display, try switching HDMI. If that dosent work, send "reboot" to reboot this system. You will get boot message again then try switching HDMI to make sure.'
 for ids in users_list:
     try:
         bot.sendMessage(ids,name_of_bot+" started with IP address as,"+CurrentIP)
