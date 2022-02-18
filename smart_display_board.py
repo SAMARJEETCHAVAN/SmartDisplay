@@ -183,13 +183,13 @@ list_of_links = ['http://192.168.2.11/smartview/punnet_view.php',
                  'http://192.168.2.11/smartview/inwt_view.php',
                  'http://192.168.2.11/smartview/knitterband_view.php',
                  'http://192.168.2.11/smartview/box_view.php',
-                 'http://192.168.2.11/smartview/9DaysTop3Packing.php',
-                 'http://192.168.2.11/smartview/9DaysTop3sorting.php',
+                 'http://192.168.2.11/smartview/waste_view.php',
+                 'http://192.168.2.11/smartview/ReportBOXPerformance.php',
                  'http://192.168.2.11/smartview/ReportPackersPerformance.php',
                  'http://192.168.2.11/smartview/reportcontrolno.php',
-                 'http://192.168.2.11/smartview/reportknitterband.php',
-                 'http://192.168.2.11/smartview/ReportBOXPerformance.php',
-                 'http://192.168.2.11/smartview/top3today.php'
+                 'http://192.168.2.11/smartview/PackersCount.php',
+                 'http://192.168.2.11/smartview/SourtersCount.php',
+                 'http://192.168.2.11/smartview/QCLineReport.php'
                  ]
 
 while True:
