@@ -123,6 +123,11 @@ def handle(msg):
                     temp = 'temp'
             loopstart = 1
             bot.sendMessage(chat_id,'safpro Loop Terminated')
+        elif command.lower()=="reboot":
+            try:
+                os.system("sudo reboot")
+            except:
+                temp = "temp"
         else:
             bot.sendMessage(chat_id,'Please enter one of following:\n1:lunch\n2:tea\n3:lunch\n4:end\n5:safpro\n6:training\n OR DIRECTLY SEND A PICTURE/VIDEO/LINK TO DISPLAY. Later send "startloop" to continue views in loo')
             
