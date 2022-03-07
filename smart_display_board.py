@@ -156,7 +156,7 @@ def handle(msg):
             bot.sendMessage(chat_id,'Received a video')
             bot.download_file(file_id,'/home/pi/SmartDisplay/xyz.mp4')
             video_path = '/home/pi/SmartDisplay/xyz.mp4'
-            subprocess.Popen(['vlc',video_path,'--fullscreen','--play-and-exit'])
+            subprocess.Popen(['cvlc',video_path,'--fullscreen','--play-and-exit'])
             loopstart = 1
         else:
             bot.sendMessage(chat_id,'Bot cannot receive this kind of file!')
@@ -166,7 +166,7 @@ def handle(msg):
             bot.sendMessage(chat_id,'Received a video')
             bot.download_file(file_id,'/home/pi/SmartDisplay/xyz.mp4')
             video_path = '/home/pi/SmartDisplay/xyz.mp4'
-            subprocess.Popen(['vlc',video_path,'--fullscreen','--play-and-exit'])
+            subprocess.Popen(['cvlc',video_path,'--fullscreen','--play-and-exit'])
             loopstart = 1
         else:
             bot.sendMessage(chat_id,'Bot cannot receive this kind of file!')
@@ -195,11 +195,15 @@ list_of_links = ['http://192.168.2.11/smartview/punnet_view.php',
 while True:
     if(loopstart==1):
         try:
+            video_path ='/home/pi/SmartDisplay/PACKINGPROCESS.mp4'
+            subprocess.Popen(['cvlc',video_path,'--fullscreen','--play-and-exit'])
+            sleep(time1)
             for link in list_of_links:
                 os.system('chromium-browser --start-fullscreen  '+link+'&')
                 sleep(time2)
                 os.system('pkill -o chromium')
                 sleep(time1)
+            
         except:
             tryagain='tryagain'
             print('There was some Error')
